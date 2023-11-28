@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Example</title>
+  <style>
+    #voteButton {
+      padding: 8px 15px;
+      background-color: #dddddd;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    #voteResult {
+      display: none;
+      padding: 8px 15px;
+      background-color: #dddddd;
+      color: #333;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <button id="voteButton">Vote!</button>
+  <span id="voteResult" style="display: none;"></span>
+</div>
+
+<script>
+document.getElementById("voteButton").addEventListener("click", function() {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var response = JSON.parse(xhr.responseText);
+        var voteTime = new Date().toString();
+        var voteResult = document.getElementById("voteResult");
+        voteResult.innerHTML = "Your vote is accepted: " + voteTime + "<br>" + response.body;
+        voteResult.style.display = "inline-block"; // or use 'block' if you want it as a block-level element
+      } else {
+        console.error('There was a problem with the request.');
+      }
+    }
+  };
+  xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+  xhr.send();
+});
+</script>
+
+</body>
+</html>
