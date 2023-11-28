@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Books List</title>
+</head>
+<body>
+
+<button id="downloadButton">Download Books</button>
+<ul id="authorsList"></ul>
+
+<script>
+// document.getElementById("downloadButton").addEventListener("click", function() {
+//   var xhr = new XMLHttpRequest();
+//   xhr.onreadystatechange = function() {
+//     if (xhr.readyState === XMLHttpRequest.DONE) {
+//       if (xhr.status === 200) {
+//         var booksData = JSON.parse(xhr.responseText);
+//         displayAuthors(booksData);
+//       } else {
+//         console.error('There was a problem with the request.');
+//       }
+//     }
+//   };
+//   xhr.open("GET", "books.json", true);
+//   xhr.send();
+// });
+document.getElementById("downloadButton").addEventListener("click", function() {
+  fetch('books.json')
+    .then(response => response.json())
+    .then(data => displayAuthors(data))
+    .catch(error => console.error('There was a problem with the request:', error));
+});
+
+
+function displayAuthors(booksData) {
+  var authorsList = document.getElementById("authorsList");
+  authorsList.innerHTML = ""; // 
+  booksData.forEach(function(book) {
+    var authorItem = document.createElement("li");
+    authorItem.textContent = book.author;
+    authorsList.appendChild(authorItem);
+  });
+}
+</script>
+
+</body>
+</html>
