@@ -9,7 +9,7 @@
 
 <script>
 function displayUserInfo(user) {
-  var userInfoDiv = document.getElementById("userInfo");
+  let userInfoDiv = document.getElementById("userInfo");
   userInfoDiv.innerHTML = `
     <img src="${user.picture.large}" alt="Avatar">
     <p><strong>Name:</strong> ${user.name.first} ${user.name.last}</p>
@@ -25,7 +25,7 @@ function displayUserInfo(user) {
 fetch('https://randomuser.me/api/')
   .then(response => response.json())
   .then(data => {
-    var user = data.results[0];
+    let user = data.results[0];
     displayUserInfo(user);
   })
   .catch(error => console.error('There was a problem with the request:', error));
