@@ -31,13 +31,13 @@
 
 <script>
 document.getElementById("voteButton").addEventListener("click", function() {
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
-        var response = JSON.parse(xhr.responseText);
-        var voteTime = new Date().toString();
-        var voteResult = document.getElementById("voteResult");
+        let response = JSON.parse(xhr.responseText);
+        let voteTime = new Date().toString();
+        let voteResult = document.getElementById("voteResult");
         voteResult.innerHTML = "Your vote is accepted: " + voteTime + "<br>" + response.body;
         voteResult.style.display = "inline-block"; // or use 'block' if you want it as a block-level element
       } else {
